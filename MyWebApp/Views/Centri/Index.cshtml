@@ -1,0 +1,77 @@
+﻿@{ 
+    Layout = null;
+}
+@using MyWebApp.Models
+@model IEnumerable<FitnesCentar>
+<html>
+    <head>
+        <script src="~/Scripts/jquery.js"></script>
+        <style>
+            body {
+                display: flex;
+                justify-content: center;
+               
+            }
+
+        </style>
+        <script>
+            
+
+        </script>
+    </head>
+
+    <body>
+        <div>
+            <form action="~/Centri/Prijava">
+                <input type="submit" value="Prijavi se" />
+            </form>
+            <form action="~/Centri/Registracija">
+                <input type="submit" value="Registruj se" />
+            </form>
+            <div id="pocetnaStrana">
+                <table border="1">
+                    <tr><th width="150px">Naziv</th><th width="150px">Adresa</th><th width="150px">Godina</th><th></th></tr>
+                    @foreach (FitnesCentar f in Model)
+                    {
+                        if (f.Obrisan == false)
+                        {
+                            <tr>
+                                <td>@f.Naziv</td>
+                                <td>@f.Adresa</td>
+                                <td>@f.GodinaOtvaranja</td>
+                                <td>
+                                    <form action="~/Centri/Opis" method="post">
+                                        <input type="hidden" name="Id" value="@f.Id" />
+                                        <button type="submit">OPIS</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>
+                <div id="pretraga">
+                    <h2>Pretraga: </h2>
+                    <form method="post" action="~/Centri/Pretraga">
+                        <label>Pretraga prema nazivu: <input type="text" name="pretragaNaziv" /></label>
+                        <label>Pretraga prema adresi: <input type="text" name="pretragaAdresa" /></label><br />
+                        <label>Pretraga prema godini otvaranja:</label><br />
+                        <label>Minimalna godina: <input type="number" name="minGodina" /> Maksimalna godina: <input type="number" name="maxGodina" /></label>
+                        <br /><button type="submit">PRETRAZI</button>
+                    </form>
+                </div>
+            </div>
+            <div>
+                <h2>Sortiranje: </h2>
+                <form method="post" action="~/Centri/Sortiranje">
+                    <input type="submit" name="dugme" value="PO NAZIVU" />
+                    <input type="submit" name="dugme" value="PO ADRESI" />
+                    <input type="submit" name="dugme" value="PO GODINI OTVARANJA" />
+                    <br />
+                    <label>Rastuce <input type="radio" name="vrsta" value="RASTUCE" checked /></label>
+                    <label>Opadajuce<input type="radio" name="vrsta" value="OPADAJUCE" /></label>
+                </form>
+            </div>
+        </div>
+    </body>
+
+</html>

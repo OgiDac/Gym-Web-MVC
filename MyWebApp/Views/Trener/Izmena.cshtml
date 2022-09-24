@@ -1,0 +1,14 @@
+﻿@{
+    Layout = null;
+}
+@using MyWebApp.Models
+@model GrupniTrening
+<form action="~/Trener/IzmeniTrening">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <label>Unesite novi naziv: <input value="@Model.Naziv" required type="text" name="Naziv" /></label><br />
+    <label>Unesite novi tip treninga: <input value="@Model.TipTreninga" required type="text" name="TipTreninga" /></label><br />
+    <label>Unesite novo trajanje: <input value="@Model.Trajanje" required type="number" name="Trajanje" /></label><br />
+    <label>Datum i vreme: <input value="@Model.DatumIVreme" required name="DatumIVreme" type="datetime" /></label><br />
+    <label>Maksimalni broj posetilaca: <input value="@Model.MaksPosetilaca" required name="MaksPosetilaca" type="number" /></label><br />
+    <input type="submit" value="Izmeni" />
+</form>

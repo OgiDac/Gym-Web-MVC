@@ -1,0 +1,13 @@
+﻿
+@{
+    Layout = null;
+}
+@model Int32
+<form action="OstaviKomentar" method="post">
+    <input type="text" name="Tekst" />
+    <input type="number" name="Ocena" />
+    <input type="hidden" value="@Model" name="IdCentra" />
+    <input type="submit" value="Potvrda" />
+</form>
+
+

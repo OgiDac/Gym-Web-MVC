@@ -1,0 +1,36 @@
+﻿@using MyWebApp.Models
+@model Korisnik
+@{
+    Layout = null;
+}
+
+<h2>IzmenaProfila</h2>
+<h2>@Model.KorisnickoIme</h2>
+<form action="~/Trener/IzmeniProfil">
+    <input type="hidden" name="KorisnickoIme" value="@Model.KorisnickoIme" />
+    <label>Unesite novo ime: <input value="@Model.Ime" required type="text" name="Ime" /></label><br />
+    <label>Unesite novo prezime: <input value="@Model.Prezime" required type="text" name="Prezime" /></label><br />
+    <label>Unesite novu lozinku: <input value="@Model.Lozinka" required type="password" name="Lozinka" /></label><br />
+    <label>
+        Izaberite pol: <select name="Pol">
+            @{
+                if (Model.Pol == "MUSKI")
+                {
+                    <option selected value="MUSKI">Muski</option>
+                    <option value="ZENKSI">Zenski</option>
+                }
+                else
+                {
+                    <option value="MUSKI">Muski</option>
+                    <option selected value="ZENKSI">Zenski</option> }
+            }
+        </select>
+    </label><br />
+    <label>Unesite vas email: <input value="@Model.Email" required name="Email" type="email" /></label><br />
+    <label>Datum rodjenja: <input required value="@Model.DatumRodjenja" name="DatumRodjenja" type="date" /></label><br />
+    <input type="submit" value="Izmeni" />
+</form>
+<form>
+    <input type="button" value="Nazad" onclick="history.back()" />
+</form>
+

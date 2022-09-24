@@ -1,0 +1,19 @@
+﻿@{ 
+    Layout = null;
+}
+<form action="~/Centri/RegistrujSe">
+    <label>Unesite vas username: <input required type="text" name="KorisnickoIme" /></label><br />
+    <label>Unesite vasu lozinku: <input required type="password" name="Lozinka" /></label><br />
+    <label>Unesite vase ime: <input required type="text" name="Ime" /></label><br />
+    <label>Unesite vase prezime: <input required type="text" name="Prezime" /></label><br />
+    <label>Pol: <select name="Pol">
+            <option selected value="MUSKI">Muski</option>
+            <option value="ZENKSI">Zenski</option>
+         </select></label><br />
+    <label>Email adresa: <input required name="Email" type="email" /></label><br />
+    <label>Datum rodjenja: <input required name="DatumRodjenja" type="date" /></label><br />
+    <input type="submit" value="Registruj se" />
+</form>
+
+
+

@@ -1,0 +1,15 @@
+﻿@{
+    Layout = null;
+}
+@using MyWebApp.Models
+<form action="~/Vlasnik/DodajCentar">
+    <label>Unesite novi naziv: <input  required type="text" name="Naziv" /></label><br />
+    <label>Unesite novu adresu: <input required type="text" name="Adresa" /></label><br />
+    <label>Unesite novu godinu otvaranja: <input  required type="number" name="GodinaOtvaranja" /></label><br />
+    <label>Mesecna cena: <input  required name="MesecnaCena" type="number" /></label><br />
+    <label>Godisnja cena: <input  required name="GodisnjaCena" type="number" /></label><br />
+    <label>Cena jednog treninga: <input  required name="CenaJednogTreninga" type="number" /></label><br />
+    <label>Cena grupnog treninga: <input  required name="CenaGrupnogTreninga" type="number" /></label><br />
+    <label>Cenatreninga sa trenerom: <input  required name="CenaSaPersonalnim" type="number" /></label><br />
+    <input type="submit" value="Dodaj" />
+</form>

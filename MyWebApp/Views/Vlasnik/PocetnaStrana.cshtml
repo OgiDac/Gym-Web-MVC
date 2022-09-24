@@ -1,0 +1,63 @@
+﻿@using MyWebApp.Models
+@{
+    Layout = null;
+}
+
+@{
+    Korisnik k = (Korisnik)(Session["Korisnik"]);
+}
+<body>
+    <table border="1">
+        <tr><th width="150px">Naziv</th><th width="150px">Adresa</th><th width="150px">Godina</th><th></th><th></th><th></th></tr>
+        @foreach (FitnesCentar f in Model)
+        {
+            if (f.Obrisan == false)
+            {
+        <tr>
+            <td>@f.Naziv</td>
+            <td>@f.Adresa</td>
+            <td>@f.GodinaOtvaranja</td>
+            <td>
+                <form action="~/Vlasnik/VlasnikOpis" method="post">
+                    <input type="hidden" name="Id" value="@f.Id" />
+                    <button type="submit">OPIS</button>
+                </form>
+            </td>
+            <td>
+                <form action="~/Vlasnik/Izmena" method="post">
+                    <input type="hidden" name="IdCentra" value="@f.Id" />
+                    <button type="submit">IZMENI</button>
+                </form>
+            </td>
+            <td>
+                <form action="~/Vlasnik/Brisanje" method="post">
+                    <input type="hidden" name="Id" value="@f.Id" />
+                    <button type="submit">OBRISI</button>
+                </form>
+            </td>
+            <td>
+                <form action="~/Vlasnik/Komentari" method="post">
+                    <input type="hidden" name="IdCentra" value="@f.Id" />
+                    <button type="submit">KOMENTARI</button>
+                </form>
+            </td>
+            <td>
+                <form action="~/Vlasnik/DodajTrenera" method="post">
+                    <input type="hidden" name="IdCentra" value="@f.Id" />
+                    <button type="submit">DODAJ TRENERA</button>
+                </form>
+            </td>
+            <td>
+                <form action="~/Vlasnik/Blok" method="post">
+                    <input type="hidden" name="IdCentra" value="@f.Id" />
+                    <button type="submit">BLOKIRAJ TRENERA</button>
+                </form>
+            </td>
+
+        </tr>
+            }
+        }
+    </table>
+
+    
+</body>

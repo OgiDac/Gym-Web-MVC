@@ -1,0 +1,45 @@
+﻿@using MyWebApp.Models
+@{
+    Layout = null;
+}
+
+@{
+    Korisnik k = (Korisnik)(Session["Korisnik"]);
+}
+
+
+
+<body>
+    <h2>Dobro dosao @k.KorisnickoIme</h2>
+    <table border="1">
+        <tr><th width="150px">Naziv</th><th width="150px">Tip treninga</th><th width="150px">Centar odrzavanja</th><th>Datum</th><th></th><th></th></tr>
+        @foreach (GrupniTrening g in Model)
+        {
+            if (g.Obrisan == false)
+            {
+                <tr>
+                    <td>@g.Naziv</td>
+                    <td>@g.TipTreninga</td>
+                    <td>@g.CentarZaOdrzavanje.Naziv</td>
+                    <td>@g.DatumIVreme</td>
+                    <td>
+                        <form action="~/Trener/Izmena" method="post">
+                            <input type="hidden" name="Id" value="@g.Id" />
+                            <button type="submit">IZMENI</button>
+                        </form>
+                    </td>
+
+                    <td>
+                        <form action="~/Trener/Spisak" method="post">
+                            <input type="hidden" name="Id" value="@g.Id" />
+                            <button type="submit">SPISAK POSETILACA</button>
+                        </form>
+                    </td>
+
+                </tr>
+            }
+        }
+    </table>
+    <button onclick="window.location.href='http://localhost:55140/Trener/Index'">Nazad</button>
+</body>
+

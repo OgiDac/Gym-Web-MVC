@@ -1,0 +1,61 @@
+﻿
+@{
+    Layout = null;
+}
+@using MyWebApp.Models
+@model FitnesCentar
+<style>
+    #Opis {
+        display: flex;
+    }
+
+        #Opis > * {
+            margin-right: 40px;
+        }
+</style>
+<div id="Opis">
+    <div>
+        <h2>Naziv fitnes centra: @Model.Naziv</h2>
+        <h2>Adresa: @Model.Adresa</h2>
+        <h3>Godina otvaranja: @Model.GodinaOtvaranja</h3>
+        <h3>Vlasnik centra: @Model.Vlasnik.KorisnickoIme</h3>
+
+        <button onclick="window.location.href='http://localhost:55140/Prijavljeni/Posetilac'">Nazad</button>
+    </div>
+    <div>
+        <h3>Mesecna cena: @Model.MesecnaCena</h3>
+        <h3>Godisnja cena: @Model.GodisnjaCena</h3>
+        <h3>Cena jednog treninga: @Model.CenaJednogTreninga</h3>
+        <h3>Cena jednog grupnog treninga: @Model.CenaGrupnogTreninga</h3>
+        <h3>Cena jednog treninga sa trenerom: @Model.CenaSaPersonalnim</h3>
+
+    </div>
+
+    
+
+
+    <div id="treninzi">
+        <h1>Predstojeci treninzi: </h1>
+        <table border="1">
+            <tr><th>Naziv treninga</th><th>Tip treninga</th><th>Datum i vreme </th></tr>
+            @foreach (GrupniTrening t in Model.Treninzi)
+            {
+                <tr><td>@t.Naziv</td><td>@t.TipTreninga</td><td>@t.DatumIVreme</td> <td><form action="PrijavaPosetilac" method="post"><input type="hidden" name="Id" value="@t.Id" /><input type="submit" value="Prijavi se" /></form></td></tr>
+            }
+        </table>
+    </div>
+</div>
+<div>
+    <h1>Komentari: </h1>
+    <table border="1">
+        <tr><th>Osoba</th><th>Tekst </th><th>Ocena</th></tr>
+        @foreach (Komentar k in Model.Komentari)
+        {
+            if (k.Odobren == true)
+            {
+                <tr><td>@k.Osoba.KorisnickoIme</td><td>@k.Tekst</td><td>@k.Ocena</td></tr>
+            }
+        }
+    </table>
+</div>
+

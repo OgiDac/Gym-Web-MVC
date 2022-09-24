@@ -1,0 +1,29 @@
+﻿@using MyWebApp.Models
+@model IEnumerable<Korisnik>
+@{
+    Layout = null;
+}
+
+<table border="1">
+    <tr><td>Ime</td><td>Prezime</td></tr>
+    @foreach (Korisnik k in Model)
+    {
+        <tr>
+            <td>
+                @k.Ime
+            </td>
+            <td>
+                @k.Prezime
+            </td>
+           
+            <td>
+                <form action="~/Vlasnik/BlokirajTrenera" method="post">
+                    <input type="hidden" name="Id" value="@k.KorisnickoIme" />
+                    <button type="submit">BLOKIRAJ GA</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+
+

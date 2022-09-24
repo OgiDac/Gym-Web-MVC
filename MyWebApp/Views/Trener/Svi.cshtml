@@ -1,0 +1,21 @@
+﻿@using MyWebApp.Models
+@model IEnumerable<GrupniTrening>
+@{ 
+    Layout = null;
+}
+
+<table border="1">
+    <tr><th width="150px">Naziv</th><th width="150px">Tip treninga</th><th width="150px">Centar odrzavanja</th><th>Datum</th></tr>
+    @foreach (GrupniTrening g in Model)
+    {
+        if (g.Obrisan == false)
+        {
+            <tr>
+                <td>@g.Naziv</td>
+                <td>@g.TipTreninga</td>
+                <td>@g.CentarZaOdrzavanje.Naziv</td>
+                <td>@g.DatumIVreme</td>
+            </tr>
+        }
+    }
+</table>

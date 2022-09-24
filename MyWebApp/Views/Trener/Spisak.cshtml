@@ -1,0 +1,15 @@
+﻿
+@{
+    Layout = null;
+
+}
+@using MyWebApp.Models
+@model IEnumerable<Korisnik>
+<table border="1">
+    <tr><td>Korisnicko ime</td><td>Ime</td><td>Prezime</td></tr>
+    @foreach(Korisnik k in Model)
+    {
+        <tr><td>@k.KorisnickoIme</td><td>@k.Ime</td><td>@k.Prezime</td></tr>
+    }
+</table>
+

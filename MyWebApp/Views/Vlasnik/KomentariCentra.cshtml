@@ -1,0 +1,25 @@
+﻿@using MyWebApp.Models
+@{
+    Layout = null;
+}
+@model IEnumerable<Komentar>
+
+<table border="1">
+    <tr><th>Tekst</th><th>Ocena</th></tr>
+    @foreach(Komentar k in Model)
+    {
+        <tr><td>@k.Tekst</td><td>@k.Ocena</td>
+           <td>
+             <form action="~/Vlasnik/Odobri" method="post">
+                 <input type="hidden" name="Id" value="@k.Id" />
+                 <button type="submit">ODOBRI</button>
+             </form>
+             <form action="~/Vlasnik/Odbij" method="post">
+                 <input type="hidden" name="Id" value="@k.Id" />
+                 <button type="submit">ODBIJ</button>
+             </form>
+         </td>
+        </tr>
+    }
+</table>
+

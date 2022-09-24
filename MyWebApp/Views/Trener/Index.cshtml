@@ -1,0 +1,47 @@
+﻿@using MyWebApp.Models
+@{
+    Layout = null;
+}
+
+@{
+    Korisnik k = (Korisnik)(Session["Korisnik"]);
+}
+<body>
+    <h2>Dobro dosao @k.KorisnickoIme</h2>
+    <form action="~/Trener/OdjaviSe">
+        <input type="submit" value="Odjavi se" />
+    </form>
+    <form action="~/Trener/PocetnaStrana">
+        <input type="submit" value="Moji treninzi" />
+    </form>
+    <form action="~/Trener/IzmenaProfila">
+        <input type="submit" value="Izmeni profil" />
+    </form>
+    <table border="1">
+        <tr><th width="150px">Naziv</th><th width="150px">Adresa</th><th width="150px">Godina</th><th></th></tr>
+        @foreach (FitnesCentar f in Model)
+        {
+            if (f.Obrisan == false)
+            {
+                <tr>
+                    <td>@f.Naziv</td>
+                    <td>@f.Adresa</td>
+                    <td>@f.GodinaOtvaranja</td>
+                    <td>
+                        <form action="~/Trener/TrenerOpis" method="post">
+                            <input type="hidden" name="Id" value="@f.Id" />
+                            <button type="submit">OPIS</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+    <form action="~/Trener/Dodaj" method="post">
+        <button type="submit">DODAJ NOVI TRENING</button>
+    </form>
+
+    <form action="~/Trener/IzProslosti" method="post">
+        <button type="submit">VIDI TRENINGE IZ PROSLOSTI</button>
+    </form>
+</body>

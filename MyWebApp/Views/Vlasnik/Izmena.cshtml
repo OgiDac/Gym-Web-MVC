@@ -1,0 +1,17 @@
+﻿@{
+    Layout = null;
+}
+@using MyWebApp.Models
+@model FitnesCentar
+<form action="~/Vlasnik/IzmeniCentar">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <label>Unesite novi naziv: <input value="@Model.Naziv" required type="text" name="Naziv" /></label><br />
+    <label>Unesite novu adresu: <input value="@Model.Adresa" required type="text" name="Adresa" /></label><br />
+    <label>Unesite novu godinu otvaranja: <input value="@Model.GodinaOtvaranja" required type="text" name="GodinaOtvaranja" /></label><br />
+    <label>Mesecna cena: <input value="@Model.MesecnaCena" required name="MesecnaCena" type="text" /></label><br />
+    <label>Godisnja cena: <input value="@Model.MesecnaCena" required name="GodisnjaCena" type="text" /></label><br />
+    <label>Cena jednog treninga: <input value="@Model.CenaJednogTreninga" required name="CenaJednogTreninga" type="text" /></label><br />
+    <label>Cena grupnog treninga: <input value="@Model.CenaGrupnogTreninga" required name="CenaGrupnogTreninga" type="text" /></label><br />
+    <label>Cenatreninga sa trenerom: <input value="@Model.CenaSaPersonalnim" required name="CenaSaPersonalnim" type="text" /></label><br />
+    <input type="submit" value="Izmeni" />
+</form>

@@ -1,0 +1,61 @@
+﻿@using MyWebApp.Models
+@{
+    Layout = null;
+}
+
+@{
+    Korisnik k = (Korisnik)(Session["Korisnik"]);
+}
+
+
+
+<body>
+    <h2>Dobro dosao @k.KorisnickoIme</h2>
+    <table border="1">
+        <tr><th width="150px">Naziv</th><th width="150px">Tip treninga</th><th width="150px">Centar odrzavanja</th><th>Datum</th><th></th><th></th></tr>
+        @foreach (GrupniTrening g in Model)
+        {
+            if (g.Obrisan == false)
+            {
+                <tr>
+                    <td>@g.Naziv</td>
+                    <td>@g.TipTreninga</td>
+                    <td>@g.CentarZaOdrzavanje.Naziv</td>
+                    <td>@g.DatumIVreme</td>
+                    <td>
+                        <form action="~/Trener/Izmena" method="post">
+                            <input type="hidden" name="Id" value="@g.Id" />
+                            <button type="submit">IZMENI</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="~/Trener/Brisanje" method="post">
+                            <input type="hidden" name="Id" value="@g.Id" />
+                            <button type="submit">OBRISI</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="~/Trener/Spisak" method="post">
+                            <input type="hidden" name="Id" value="@g.Id" />
+                            <button type="submit">SPISAK POSETILACA</button>
+                        </form>
+                    </td>
+
+                </tr>
+            }
+        }
+    </table>
+    <div id="pretraga">
+        <h2>Pretraga: </h2>
+        <form method="post" action="~/Trener/Pretraga">
+            <label>Pretraga prema nazivu: <input type="text" name="pretragaNaziv" /></label>
+            <label>Pretraga prema tipu: <input type="text" name="pretragaTip" /></label><br />
+            <label>Pretraga prema godini otvaranja:</label><br />
+            <label>Minimalno vrijeme <input type="datetime-local" value="0000-00-00T00:00:00" name="minGodina"></label><br />
+            <label>Maksimalno vrijeme <input type="datetime-local" value="0000-00-00T00:00:00" name="maksGodina"></label><br />
+            <br /><button type="submit">PRETRAZI</button>
+        </form>
+    </div>
+    <button onclick="window.location.href='http://localhost:55140/Trener/Index'">Nazad</button>
+</body>
+

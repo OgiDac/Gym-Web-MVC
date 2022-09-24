@@ -1,0 +1,96 @@
+﻿@using MyWebApp.Models
+@model IEnumerable<FitnesCentar>
+@{
+    Layout = null;
+}
+@{
+    Korisnik k = (Korisnik)(Session["Korisnik"]);
+    List<GrupniTrening> listaPrijavljenih = (List<GrupniTrening>)(Session["TreninziPrijavljeni"]);
+}
+<body>
+<h2>Dobro dosao @k.KorisnickoIme</h2>
+<form action="~/Prijavljeni/OdjaviSe">
+    <input type="submit" value="Odjavi se" />
+</form>
+
+<form action="~/Prijavljeni/IzmenaProfila">
+    <input type="submit" value="Izmeni profil" />
+</form>
+
+
+<div id="pocetnaStrana">
+    <table border="1">
+        <tr><th width="150px">Naziv</th><th width="150px">Adresa</th><th width="150px">Godina</th><th></th><th></th></tr>
+        @foreach (FitnesCentar f in Model)
+        {
+            if (f.Obrisan == false)
+            {
+        <tr>
+            <td>@f.Naziv</td>
+            <td>@f.Adresa</td>
+            <td>@f.GodinaOtvaranja</td>
+            <td>
+                <form action="~/Prijavljeni/PosetilacOpis" method="post">
+                    <input type="hidden" name="Id" value="@f.Id" />
+                    <button type="submit">OPIS</button>
+                </form>
+            </td>
+            <td>
+                <form action="~/Prijavljeni/PosetilacKomentar" method="post">
+                    <input type="hidden" name="IdCentra" value="@f.Id" />
+                    <button type="submit">OSTAVI KOMENTAR</button>
+                </form>
+            </td>
+        </tr>
+                }
+            }
+    </table>
+    <div id="pretraga">
+        <h2>Pretraga fitnes centara: </h2>
+        <form method="post" action="~/Prijavljeni/Pretraga">
+            <label>Pretraga prema nazivu: <input type="text" name="pretragaNaziv" /></label>
+            <label>Pretraga prema adresi: <input type="text" name="pretragaAdresa" /></label><br />
+            <label>Pretraga prema godini otvaranja:</label><br />
+            <label>Minimalna godina: <input type="number" name="minGodina" /> Maksimalna godina: <input type="number" name="maxGodina" /></label>
+            <br /><button type="submit">PRETRAZI</button>
+        </form>
+    </div>
+
+    <div>
+        <table border="1">
+            <tr><td>Naziv</td><td>Tip treninga</td><td>Fitnes Centar</td><td>Trajanje</td><td>Vreme</td><td>Maks</td></tr>
+            @foreach(GrupniTrening g in listaPrijavljenih)
+             {
+                if (g.Obrisan == false && DateTime.Compare(g.DatumIVreme, DateTime.Now) < 0)
+                {
+                <tr><td>@g.Naziv</td><td>@g.TipTreninga</td><td>@g.CentarZaOdrzavanje.Naziv</td><td>@g.Trajanje</td><td>@g.DatumIVreme.ToString()</td><td>@g.MaksPosetilaca</td></tr>
+                 }
+             }
+
+        </table>
+    </div>
+
+    <div>
+        <h2>Pretraga ranijih treninga: </h2>
+        <form method="post" action="~/Prijavljeni/PretragaTrening">
+            <label>Pretraga prema nazivu: <input type="text" name="pretragaNaziv" /></label>
+            <label>Pretraga prema tipu treninga: <input type="text" name="pretragaTip" /></label><br />
+            <label>Pretraga prema nazivu fitnes centra: <input type="text" name="fitnesCentar" /></label><br />
+            <br /><button type="submit">PRETRAZI</button>
+        </form>
+    </div>
+
+    <div>
+        <h2>Sortiranje: </h2>
+        <form method="post" action="~/Prijavljeni/Sortiranje">
+            <input type="submit" name="dugme" value="PO NAZIVU" />
+            <input type="submit" name="dugme" value="PO TIPU TRENINGA" />
+            <input type="submit" name="dugme" value="PO DATUMU ODRZAVANJA" />
+            <br />
+            <label>Rastuce <input type="radio" name="vrsta" value="RASTUCE" checked /></label>
+            <label>Opadajuce<input type="radio" name="vrsta" value="OPADAJUCE" /></label>
+        </form>
+    </div>
+</div>
+    </body>
+
